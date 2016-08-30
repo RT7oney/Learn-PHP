@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link rel='stylesheet prefetch' href='http://fonts.useso.com/css?family=Open+Sans'>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/cut-img.css">
+    <!-- <link rel="stylesheet" type="text/css" href="css/weui.css"> -->
+    <!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+    <!-- 上传头像 -->
+    <div id="cut-img" class="" style="background-color: #000;height: 100%;width: 100%;position: absolute;display: none;">
+        <div id="cancel" style="font-size:15px;color:#fff; position: absolute; right: 10px; top: 10px; width: 50px; text-align: right;">
+            取消
+        </div>
+        <div class="container">
+            <!-- <iframe border="0" id="content" src="" frameborder="0" height="100%" width="100%"></iframe> -->
+            <div class="imageBox">
+                <div class="thumbBox"></div>
+                <div class="spinner" style="display: none">Loading...</div>
+            </div>
+            <!-- <div class="action"> -->
+            <input type="file" id="file" style="float:left; width: 250px;display: none;">
+            <input type="button" id="btnCrop" value="Crop" style="float: right;display: none;">
+            <!-- <input type="button" id="btnZoomIn" value="+" style="float: right"> -->
+            <!-- <input type="button" id="btnZoomOut" value="-" style="float: right"> -->
+            <!-- </div> -->
+            <div class="cropped" style="display: none;"></div>
+            <div style="padding-top:10%;">
+                <div style="width:90%;margin:0 auto;">
+                    <a id="up-btn" href="javascript:;" class="weui_btn weui_btn_plain_primary">上传</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 聊天主界面 -->
+    <div class="div-body">
+        <div class="demo" id="body">
+            <svg class="sidebar" viewBox="0 0 300 500">
+                <path class="s-path" fill="#fff" d="M0,0 50,0 a0,250 0 1,1 0,500 L0,500" />
+            </svg>
+            <div class="static">
+                <div class="static__text" id="welcome-content"></div>
+            </div>
+            <!-- 用户列表 -->
+            <div class="sidebar-content" id="user-list">
+                <div class="contact" id="all" onClick="talkToOne(this)">
+                    <img src="img/logo.jpg" alt="" style="width:34px;height:34px;" class="contact__photo" />
+                    <span class="contact__name">所有人</span>
+                    <span class="contact__status online"></span>
+                </div>
+                <!-- <div class="contact">
+                <img src="img/2.png" alt="" class="contact__photo" />
+                <span class="contact__name">Natalie Portman</span>
+                <span class="contact__status online"></span>
+            </div> -->
+            </div>
+            <!-- 聊天界面 -->
+            <div class="chat" id="chat">
+                <span class="chat__back"></span>
+                <span class="chat__status" style="font-size:15px;">在线</span>
+                <div class="chat__person">
+                    <span class="chat__online active"></span>
+                    <span class="chat__name">所有人</span>
+                </div>
+                <div class="chat__messages" id="all-chat">
+                    <!-- <div class="chat__msgRow">
+                        <p>lalaal</p>
+                        <div class="chat__message mine">Such SVG, much Javascript, very CSS!</div>
+                    </div>
+                    <div class="chat__msgRow">
+                        <div class="chat__message notMine">Wow!</div>
+                    </div>
+                    <div class="chat__msgRow">
+                        <div class="chat__message notMine">Very elastic! Such easings!</div>
+                    </div>
+                    <div class="chat__msgRow">
+                        <div class="chat__message mine">
+                        </div>
+                    </div> -->
+                </div>
+                <input type="text" class="chat__input" placeholder="Your message" />
+            </div>
+        </div>
+    </div>
+    <script src='js/stopExecutionOnTimeout.js?t=1'></script>
+    <script src='http://libs.useso.com/js/jquery/1.11.0/jquery.min.js'></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/layer.js"></script>
+    <script type="text/javascript" src="js/cropbox.js"></script>
+    <script>
+    /**
+     * 初始化
+     */
+    var name;
+    var to = 'all';
+    var to_name = '大家';
+    var head_img = 'img/logo.jpg';
+    var users;
+
+    if (typeof(WebSocket) == 'undefined') {
+        alert('你的浏览器不支持 WebSocket ，推荐使用Google Chrome 或者 Mozilla Firefox');
+    }
+    var send_msg = 'type=talk&content=';
+    var url = 'ws://192.168.1.113:8000';
+    $("#up-btn").click(function() {
+        $("#btnCrop").click();
+    });
+    $("#cancel").click(function() {
+        $("#body").show();
+        $("#cut-img").hide();
+    });
+
+    /**
+     * 取名字
+     */
+    layer.prompt({
+        title: '取一个名字吧：',
+        formType: 0,
+    }, function(text, index) {
+        name = text;
+        layer.close(index);
+        $("#welcome-content").html('你好' + name + '!');
+        console.log('我的名字------' + name);
+        layer.confirm('上传一张头像吧？', {
+            btn: ['好的', '算了'] //按钮
+        }, function(index) {
+            $("#file").click();
+            layer.close(index);
+        }, function(index) {
+            layer.close(index);
+        });
+    });
+    // var name = prompt('取一个名字吧：');
+
+    /**
+     * 图像裁剪
+     */
+    var options = {
+        thumbBox: '.thumbBox',
+        spinner: '.spinner',
+        imgSrc: '',
+    }
+    var cropper = $('.imageBox').cropbox(options);
+    $('#file').on('change', function() {
+        $("#body").hide();
+        $("#cut-img").show();
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            options.imgSrc = e.target.result;
+            cropper = $('.imageBox').cropbox(options);
+        }
+        reader.readAsDataURL(this.files[0]);
+        this.files = [];
+    });
+    $('#btnCrop').on('click', function() {
+        var img = cropper.getDataURL();
+        // console.log(img);
+        $.ajax({
+            type: "POST",
+            url: "upHeadImg.php",
+            data: {
+                "img": img,
+                "name": name,
+            },
+            dataType: "json",
+            success: function(msg) {
+                // console.log(msg);
+                // alert(msg);
+                if (msg.flag == 1) {
+                    $("#body").show();
+                    $("#cut-img").hide();
+                    console.log(msg.msg);
+                    head_img = msg.msg;
+                    createSocket();
+                } else {
+                    layer.msg('上传失败', function() {
+                        $("#body").show();
+                        $("#cut-img").hide();
+                    });
+                }
+                return false;
+            },
+            error: function(msg) {
+                return false;
+            }
+        });
+    });
+
+
+    /**
+     * socket建立
+     */
+    function createSocket() {
+        so = new WebSocket(url);
+        console.log(so);
+
+        so.onopen = function() {
+            if (so.readyState == 1) {
+                console.log('send name -----' + name);
+                so.send('type=add&name=' + name+'&head='+head_img);
+            }
+        }
+
+        so.onclose = function() {
+            so = false;
+        }
+
+        so.onmessage = function(recv_msg) {
+            console.log('----recv_msg----');
+            console.log(recv_msg);
+            console.log('----------------');
+            // console.log('recv_msg.type------' + recv_msg.type);
+            if (recv_msg.isTrusted == true) {
+                var real_msg = JSON.parse(recv_msg.data);
+                console.log('----real_msg----');
+                console.log(real_msg);
+                console.log('----------------');
+                if (real_msg.type == 'add') {
+                    // 有人进入聊天室
+                    console.log("有人进来");
+                    $("#user-list").empty();
+                    // $("#user-list").append('<p id="all" onClick="talkToOne(this)"><span id="all-span" class="at-span">@</span>所有人</p>');
+                    $("#user-list").append('<div class="contact" id="all" onClick="talkToOne(this)"><img src="img/logo.jpg" alt="" style="width:34px;height:34px;" class="contact__photo" /><span class="contact__name">所有人</span><span class="contact__status online"></span></div>');
+                    users = real_msg.users;
+                    console.log(users);
+                    for (var i in real_msg.users) {
+                        console.log(i);
+                        console.log('名字----'+real_msg.users[i].name);
+                        console.log('头像----'+real_msg.users[i].head);
+                        $("#user-list").append('<div class="contact" id="' + i + '" onClick="talkToOne(this)"><img src="' + real_msg.users[i].head + '" alt="" style="width:34px;height:34px;" class="contact__photo" /><span class="contact__name">' + real_msg.users[i].name + '</span><span class="contact__status online"></span></div>');
+                    }
+                    name = real_msg.content;
+                    $("#all-chat").append('<div class="chat__msgRow"><p>管理员</p><div class="chat__message mine" style="background-color:#009688">欢迎' + real_msg.content + '加入</div></div>');
+                    return;
+                } else if (real_msg.type == 'remove') {
+                    // 有人退出聊天室
+                    console.log("有人退出");
+                    $("#" + real_msg.removekey).remove();
+                    // $("#content-area").append('<p>@@@@@@' + real_msg.content + '@@@@@@</p>');
+                    $("#all-chat").append('<div class="chat__msgRow"><p>管理员</p><div class="chat__message mine" style="background-color:#ffcc80">' + real_msg.content + '</div></div>');
+                    return;
+                } else {
+                    // 有人聊天
+                    console.log("聊天消息的to：-----" + to);
+                    if (to == 'all') {
+                        to_name = '大家';
+                    } else {
+                        to_name = $("#" + to).html().replace('@', '');
+                    }
+                    if (real_msg.from == name) {
+                        $("#content-area").append('<p><span style="color:#009688">我</span>对<span style="color:#009688">' + to_name + '</span>说：' + real_msg.content + '</p>');
+                    } else {
+                        if (real_msg.to == 'all') {
+                            $("#content-area").append('<p><span style="color:#009688">' + real_msg.from + '</span>对<span style="color:#009688">大家</span>说：' + real_msg.content + '</p>');
+                        } else {
+                            $("#content-area").append('<p><span style="color:#009688">' + real_msg.from + '</span>对<span style="color:#009688">我</span>说：' + real_msg.content + '</p>');
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 发送信息
+     */
+    $("#chat-send").click(function() {
+        var content = $("#chat-text").val();
+        console.log('send消息中的to-----:' + to);
+        if (content == null || content == undefined) {
+            alert("聊天内容不能为空");
+            return false;
+        }
+        so.send(send_msg + content + "&to=" + to + "&from=" + name)
+        console.log(send_msg);
+        $("#chat-text").val(null);
+    });
+
+    /**
+     * 和谁聊天
+     */
+    function talkToOne(e) {
+        console.log(e.id);
+        $("#chat").append('<div class="chat__messages" id="' + e.id + '-chat"></div>');
+        $("#"+e.id).show();
+        for (var i in users) {
+            // $("#user-list").append('<p id="' + i + '" onClick="talkToOne(this)"><span id="' + i + '-span" class="at-span">&nbsp;</span>' + real_msg.users[i] + '</p>');
+            if (i == e.id) {
+                $("#" + i + "-list").hide();
+            }
+        }
+        $().hide();
+        to = e.id;
+        $(".at-span").html('&nbsp;');
+        $("#" + e.id + "-span").html('@');
+    }
+    </script>
+</body>
+
+</html>

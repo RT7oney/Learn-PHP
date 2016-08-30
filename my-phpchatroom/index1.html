@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta name="author" content="探索者"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> -->
+    <title>php_HTML5_聊天室</title>
+    <style>
+    .content {
+        width: 75%;
+        height: 400px;
+        border: 3px solid #000;
+        position: relative;
+    }
+    
+    .list {
+        width: 20%;
+        height: 400px;
+        border: 3px solid #000;
+        position: absolute;
+        right: 18px;
+        top: 8px;
+    }
+    
+    .chat-input {
+        width: 85%;
+        height: 30px;
+        border: 3px solid #000;
+    }
+    
+    .chat-button {
+        width: 12%;
+        height: 38px;
+        border: 3px solid #000;
+        background-color: #fff;
+        font-size: 17px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div class="content" name="" id="content-area" cols="30" rows="10">
+            <!-- <p id="content-line"></p> -->
+        </div>
+        <div class="list" id="user-list">
+            <p id="all" onClick="talkToOne(this)"><span id="all-span" class="at-span">@</span>所有人</p>
+        </div>
+    </div>
+    <div class="chat" style="padding-top:2%;">
+        <input id="chat-text" type="text" class="chat-input">
+        <button id="chat-send" class="chat-button">发送</button>
+    </div>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script>
+    var name = prompt('取一个名字吧：');
+    console.log('我的名字------'+name);
+    var to = 'all';
+    var to_name = '大家';
+
+    if (typeof(WebSocket) == 'undefined') {
+        alert('你的浏览器不支持 WebSocket ，推荐使用Google Chrome 或者 Mozilla Firefox');
+    }
+    var send_msg = 'type=talk&content=';
+    var url = 'ws://192.168.1.113:8000';
+    createSocket();
+
+    function createSocket() {
+        so = new WebSocket(url);
+        console.log(so);
+        so.onopen = function() {
+            if (so.readyState == 1) {
+                so.send('type=add&name=' + name);
+            }
+        }
+
+        so.onclose = function() {
+            so = false;
+        }
+
+        so.onmessage = function(recv_msg) {
+            console.log('----recv_msg----');
+            console.log(recv_msg);
+            console.log('----------------');
+            // console.log('recv_msg.type------' + recv_msg.type);
+            if (recv_msg.isTrusted == true) {
+                var real_msg = JSON.parse(recv_msg.data);
+                console.log('----real_msg----');
+                console.log(real_msg);
+                console.log('----------------');
+                // 有人进入聊天室
+                if (real_msg.add == true) {
+                    console.log("有人进来");
+                    $("#user-list").empty();
+                    $("#user-list").append('<p id="all" onClick="talkToOne(this)"><span id="all-span" class="at-span">@</span>所有人</p>');
+                    for (var i in real_msg.users) {
+                        $("#user-list").append('<p id="' + i + '" onClick="talkToOne(this)"><span id="' + i + '-span" class="at-span">&nbsp;</span>' + real_msg.users[i] + '</p>');
+                    }
+                    name = real_msg.content;
+                    $("#content-area").append('<p>######欢迎' + real_msg.content + '加入！######</p>');
+                    return;
+                }
+                // 有人退出聊天室
+                if (real_msg.remove == true) {
+                    console.log("有人退出");
+                    $("#" + real_msg.removekey).remove();
+                    $("#content-area").append('<p>@@@@@@' + real_msg.content + '@@@@@@</p>');
+                    return;
+                }
+                // 有人聊天
+                console.log("聊天消息的to：-----" + to);
+                if (to == 'all') {
+                    to_name = '大家';
+                } else {
+                    to_name = $("#" + to).html().replace('@', '');
+                }
+                if (real_msg.from == name) {
+                    $("#content-area").append('<p><span style="color:#009688">我</span>对<span style="color:#009688">' + to_name + '</span>说：' + real_msg.content + '</p>');
+                } else {
+                    if (real_msg.to == 'all') {
+                        $("#content-area").append('<p><span style="color:#009688">' + real_msg.from + '</span>对<span style="color:#009688">大家</span>说：' + real_msg.content + '</p>');
+                    } else {
+                        $("#content-area").append('<p><span style="color:#009688">' + real_msg.from + '</span>对<span style="color:#009688">我</span>说：' + real_msg.content + '</p>');
+                    }
+                }
+            }
+        }
+    }
+
+    $("#chat-send").click(function() {
+        var content = $("#chat-text").val();
+        console.log('send消息中的to-----:' + to);
+        if (content == null || content == undefined) {
+            alert("聊天内容不能为空");
+            return false;
+        }
+        so.send(send_msg + content + "&to=" + to + "&from=" + name)
+        console.log(send_msg);
+        $("#chat-text").val(null);
+    });
+
+    function talkToOne(e) {
+        console.log(e.id);
+        to = e.id;
+        $(".at-span").html('&nbsp;');
+        $("#" + e.id + "-span").html('@');
+    }
+    </script>
+</body>
+
+</html>
