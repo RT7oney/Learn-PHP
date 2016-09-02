@@ -26,11 +26,13 @@
 // }
 //
 class DesCrypter {
-	private $key = '45683968';
+	private $key;
 	private $encrypter;
 	public function __construct($key = '', $algorithm = MCRYPT_DES, $mode = MCRYPT_MODE_CBC) {
-		if (!empty($key)) {
+		if (!$key) {
 			$this->key = '45683968';
+		} else {
+			$this->key = $key;
 		}
 		$this->encrypter = mcrypt_module_open($algorithm, '', $mode, '');
 	}
@@ -63,20 +65,26 @@ function pkcs5unPadding($data) {
 }
 ################DES解密###################
 // 3DES方式
-$encrypter = new DesCrypter(null, MCRYPT_3DES);
+$app_key = 'd07fac6c';
+$encrypter = new DesCrypter($app_key, MCRYPT_3DES);
 // DES 方式
 // $encrypter = new DesCrypter();
-$data = base64_decode("fgi0sn+Z2ZmUNweXwZGDjz4QohSU+QSaTB3ehV9OvheOrGYriuFKwJ+BkYWNO9XSazaGtS4EDp3+6t3vhBBl4sgDk6S8euKKGen5cRNP0I0=");
+$data = base64_decode("lG+41O53KaLbKKZrvCWvbTxXrb73MyduvpsYUBW+Ta3g9FDOb8ahQObjRIdDHmVuECULwWboJmS52YwdKvoBZw==");
 $result = $encrypter->decrypt($data);
 $res = json_decode($result, true);
 var_dump($res);
 echo '<hr>';
 $encrypter->close();
-#########################################
+##################签名#######################
 $timestamp = time();
-$app_key = "23e5f7edf37e0c52644a41a140ad159f";
+$app_key = "d07fac6c";
 $sign = md5($app_key . $timestamp);
 print_r($timestamp);
 echo '<hr>';
 print_r($sign);
+echo '<hr>';
 ?>
+
+<!-- 9ecfe3273a04eba562cf95f16cc961f8
+
+1472655189 -->
