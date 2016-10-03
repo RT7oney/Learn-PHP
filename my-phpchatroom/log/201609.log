@@ -1,0 +1,85 @@
+[#@2016/09/13 12:35:55#]------socket_recv() the recv_bytes : 493
+[#@2016/09/13 12:35:55#]------socket_recv() the recv_bytes : 29
+[#@2016/09/13 12:35:55#]------@decode() unpacked msg:Array
+[#@2016/09/13 12:35:55#]------@decode() substr head:81
+[#@2016/09/13 12:35:55#]------@decode() hexdec($head{1}):1this is $head{1}1
+[#@2016/09/13 12:35:55#]------@decode() $mask is :[135,176,153,82]
+[#@2016/09/13 12:35:55#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:35:55#]------@encode() preg_replace msg : {"type":"add","content":"\u5566\u5566\u5566","users":[{"name":"\u5566\u5566\u5566","head":null}]}
+[#@2016/09/13 12:35:55#]------@encode() msg length :97and msg dechex(length):61
+[#@2016/09/13 12:35:55#]------@encode() frame  :["81","61","7b2274797065223a22616464222c22636f6e74656e74223a225c75353536365c75353536365c7535353636222c227573657273223a5b7b226e616d65223a225c75353536365c75353536365c7535353636222c2268656164223a6e756c6c7d5d7d"]
+[#@2016/09/13 12:35:55#]------@dealMsg() final msg : Åa{"type":"add","content":"\u5566\u5566\u5566","users":[{"name":"\u5566\u5566\u5566","head":null}]}
+[#@2016/09/13 12:36:06#]------socket_recv() the recv_bytes : 61
+[#@2016/09/13 12:36:06#]------@decode() unpacked msg:Array
+[#@2016/09/13 12:36:06#]------@decode() substr head:81
+[#@2016/09/13 12:36:06#]------@decode() hexdec($head{1}):1this is $head{1}1
+[#@2016/09/13 12:36:06#]------@decode() $mask is :[94,139,122,147]
+[#@2016/09/13 12:36:06#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:06#]------@encode() preg_replace msg : {"content":"\u627e\u4e2a\u6b27\u7f8e\u9ad8","from":"\u5566\u5566\u5566","to":"all"}
+[#@2016/09/13 12:36:06#]------@encode() msg length :83and msg dechex(length):53
+[#@2016/09/13 12:36:06#]------@encode() frame  :["81","53","7b22636f6e74656e74223a225c75363237655c75346532615c75366232375c75376638655c7539616438222c2266726f6d223a225c75353536365c75353536365c7535353636222c22746f223a22616c6c227d"]
+[#@2016/09/13 12:36:06#]------@dealMsg() final msg : ÅS{"content":"\u627e\u4e2a\u6b27\u7f8e\u9ad8","from":"\u5566\u5566\u5566","to":"all"}
+[#@2016/09/13 12:36:23#]------socket_recv() the recv_bytes : 397
+[#@2016/09/13 12:36:23#]------socket_recv() the recv_bytes : 26
+[#@2016/09/13 12:36:23#]------@decode() unpacked msg:Array
+[#@2016/09/13 12:36:23#]------@decode() substr head:81
+[#@2016/09/13 12:36:23#]------@decode() hexdec($head{1}):1this is $head{1}1
+[#@2016/09/13 12:36:23#]------@decode() $mask is :[5,5,215,16]
+[#@2016/09/13 12:36:23#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:23#]------@encode() preg_replace msg : {"type":"add","content":"woemgn","users":[{"name":"\u5566\u5566\u5566","head":null},{"name":"woemgn","head":null}]}
+[#@2016/09/13 12:36:23#]------@encode() msg length :115and msg dechex(length):73
+[#@2016/09/13 12:36:23#]------@encode() frame  :["81","73","7b2274797065223a22616464222c22636f6e74656e74223a22776f656d676e222c227573657273223a5b7b226e616d65223a225c75353536365c75353536365c7535353636222c2268656164223a6e756c6c7d2c7b226e616d65223a22776f656d676e222c2268656164223a6e756c6c7d5d7d"]
+[#@2016/09/13 12:36:23#]------@dealMsg() final msg : Ås{"type":"add","content":"woemgn","users":[{"name":"\u5566\u5566\u5566","head":null},{"name":"woemgn","head":null}]}
+[#@2016/09/13 12:36:47#]------socket_recv() the recv_bytes : 65
+[#@2016/09/13 12:36:47#]------@decode() unpacked msg:Array
+[#@2016/09/13 12:36:47#]------@decode() substr head:81
+[#@2016/09/13 12:36:47#]------@decode() hexdec($head{1}):1this is $head{1}1
+[#@2016/09/13 12:36:47#]------@decode() $mask is :[204,167,83,80]
+[#@2016/09/13 12:36:47#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:47#]------@encode() preg_replace msg : {"content":"\u6211\u4e70\u5676\u4e8b\u53d1\u540en","from":"\u5566\u5566\u5566","to":"all"}
+[#@2016/09/13 12:36:47#]------@encode() msg length :90and msg dechex(length):5a
+[#@2016/09/13 12:36:47#]------@encode() frame  :["81","5a","7b22636f6e74656e74223a225c75363231315c75346537305c75353637365c75346538625c75353364315c75353430656e222c2266726f6d223a225c75353536365c75353536365c7535353636222c22746f223a22616c6c227d"]
+[#@2016/09/13 12:36:47#]------@dealMsg() final msg : ÅZ{"content":"\u6211\u4e70\u5676\u4e8b\u53d1\u540en","from":"\u5566\u5566\u5566","to":"all"}
+[#@2016/09/13 12:36:54#]------socket_recv() failed ,reason:Undefined error: 0
+[#@2016/09/13 12:36:54#]------socket_recv() the recv_bytes : 0
+[#@2016/09/13 12:36:54#]------key:1 closed
+[#@2016/09/13 12:36:54#]------head::::::::
+[#@2016/09/13 12:36:54#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:54#]------@encode() preg_replace msg : {"removekey":1,"content":"\u9000\u51fa\u804a\u5929\u5ba4"}
+[#@2016/09/13 12:36:54#]------@encode() msg length :58and msg dechex(length):3a
+[#@2016/09/13 12:36:54#]------@encode() frame  :["81","3a","7b2272656d6f76656b6579223a312c22636f6e74656e74223a225c75393030305c75353166615c75383034615c75353932395c7535626134227d"]
+[#@2016/09/13 12:36:54#]------@dealMsg() final msg : Å:{"removekey":1,"content":"\u9000\u51fa\u804a\u5929\u5ba4"}
+[#@2016/09/13 12:36:58#]------socket_recv() the recv_bytes : 397
+[#@2016/09/13 12:36:58#]------socket_recv() the recv_bytes : 26
+[#@2016/09/13 12:36:58#]------@decode() unpacked msg:Array
+[#@2016/09/13 12:36:58#]------@decode() substr head:81
+[#@2016/09/13 12:36:58#]------@decode() hexdec($head{1}):1this is $head{1}1
+[#@2016/09/13 12:36:58#]------@decode() $mask is :[118,220,167,153]
+[#@2016/09/13 12:36:58#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:58#]------@encode() preg_replace msg : {"type":"add","content":"\u6211\u7684","users":{"0":{"name":"\u5566\u5566\u5566","head":null},"2":{"name":"\u6211\u7684","head":null}}}
+[#@2016/09/13 12:36:58#]------@encode() msg length :135and msg dechex(length):87
+[#@2016/09/13 12:36:58#]------@encode() frame  :["81","87","7b2274797065223a22616464222c22636f6e74656e74223a225c75363231315c7537363834222c227573657273223a7b2230223a7b226e616d65223a225c75353536365c75353536365c7535353636222c2268656164223a6e756c6c7d2c2232223a7b226e616d65223a225c75363231315c7537363834222c2268656164223a6e756c6c7d7d7d"]
+[#@2016/09/13 12:36:58#]------@dealMsg() final msg : Åá{"type":"add","content":"\u6211\u7684","users":{"0":{"name":"\u5566\u5566\u5566","head":null},"2":{"name":"\u6211\u7684","head":null}}}
+[#@2016/09/13 12:36:58#]------socket_recv() the recv_bytes : 32
+[#@2016/09/13 12:36:58#]------@decode() unpacked msg:Array
+[#@2016/09/13 12:36:58#]------@decode() substr head:88
+[#@2016/09/13 12:36:58#]------@decode() hexdec($head{1}):8this is $head{1}8
+[#@2016/09/13 12:36:58#]------why decode msg ??? 
+[#@2016/09/13 12:36:58#]------socket_recv() failed ,reason:Undefined error: 0
+[#@2016/09/13 12:36:58#]------socket_recv() the recv_bytes : 0
+[#@2016/09/13 12:36:58#]------key:0 closed
+[#@2016/09/13 12:36:58#]------head::::::::
+[#@2016/09/13 12:36:58#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:58#]------@encode() preg_replace msg : {"removekey":0,"content":"\u9000\u51fa\u804a\u5929\u5ba4"}
+[#@2016/09/13 12:36:58#]------@encode() msg length :58and msg dechex(length):3a
+[#@2016/09/13 12:36:58#]------@encode() frame  :["81","3a","7b2272656d6f76656b6579223a302c22636f6e74656e74223a225c75393030305c75353166615c75383034615c75353932395c7535626134227d"]
+[#@2016/09/13 12:36:58#]------@dealMsg() final msg : Å:{"removekey":0,"content":"\u9000\u51fa\u804a\u5929\u5ba4"}
+[#@2016/09/13 12:36:58#]------socket_recv() failed ,reason:Connection reset by peer
+[#@2016/09/13 12:36:58#]------socket_recv() the recv_bytes : 
+[#@2016/09/13 12:36:58#]------key:2 closed
+[#@2016/09/13 12:36:58#]------head::::::::
+[#@2016/09/13 12:36:58#]------@dealMsg() parse_str msg
+[#@2016/09/13 12:36:58#]------@encode() preg_replace msg : {"removekey":2,"content":"\u9000\u51fa\u804a\u5929\u5ba4"}
+[#@2016/09/13 12:36:58#]------@encode() msg length :58and msg dechex(length):3a
+[#@2016/09/13 12:36:58#]------@encode() frame  :["81","3a","7b2272656d6f76656b6579223a322c22636f6e74656e74223a225c75393030305c75353166615c75383034615c75353932395c7535626134227d"]
+[#@2016/09/13 12:36:58#]------@dealMsg() final msg : Å:{"removekey":2,"content":"\u9000\u51fa\u804a\u5929\u5ba4"}

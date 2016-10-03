@@ -36,4 +36,35 @@ class hello {
 	}
 }
 Test::example();
+
+##############################################
+
+function A() {
+
+	//
+	do_action('login');
+
+}
+
+function B() {
+
+}
+
+add_action('login', B);
+add_action('login', C);
+add_action('logout', B);
+
+$callbacks = [
+
+	'login' => [
+		'B',
+		'C',
+	],
+
+	'logout' => [
+		'B',
+	],
+
+];
+
 ?>

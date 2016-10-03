@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/default.css">
-    <link rel='stylesheet prefetch' href='http://fonts.useso.com/css?family=Open+Sans'>
+    <!-- <link rel='stylesheet prefetch' href='http://fonts.useso.com/css?family=Open+Sans'> -->
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/cut-img.css">
     <!-- <link rel="stylesheet" type="text/css" href="css/weui.css"> -->
@@ -94,7 +94,7 @@
         </div>
     </div>
     <script src='js/stopExecutionOnTimeout.js?t=1'></script>
-    <script src='http://libs.useso.com/js/jquery/1.11.0/jquery.min.js'></script>
+    <script src='js/jquery.min.js'></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/layer.js"></script>
     <script type="text/javascript" src="js/cropbox.js"></script>
@@ -112,7 +112,7 @@
         alert('你的浏览器不支持 WebSocket ，推荐使用Google Chrome 或者 Mozilla Firefox');
     }
     var send_msg = 'type=talk&content=';
-    var url = 'ws://192.168.1.113:8000';
+    var url = 'ws://192.168.1.100:9999';
     $("#up-btn").click(function() {
         $("#btnCrop").click();
     });
