@@ -1,0 +1,24 @@
+[#@2016/10/10 08:05:10#]---红包xml---<xml>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[IP地址非你在商户平台设置的可用IP地址]]></return_msg>
+<result_code><![CDATA[FAIL]]></result_code>
+<err_code><![CDATA[NO_AUTH]]></err_code>
+<err_code_des><![CDATA[IP地址非你在商户平台设置的可用IP地址]]></err_code_des>
+<mch_billno><![CDATA[1385373702201610100805108897]]></mch_billno>
+<mch_id><![CDATA[1385373702]]></mch_id>
+<wxappid><![CDATA[wx898f13df6bf0ea41]]></wxappid>
+<re_openid><![CDATA[oLgNpwzC3S5tSqFKJrCDdjkyuDBs]]></re_openid>
+<total_amount>101</total_amount>
+</xml>
+[#@2016/10/10 08:08:24#]---红包xml---<xml>
+<return_code><![CDATA[SUCCESS]]></return_code>
+<return_msg><![CDATA[IP地址非你在商户平台设置的可用IP地址]]></return_msg>
+<result_code><![CDATA[FAIL]]></result_code>
+<err_code><![CDATA[NO_AUTH]]></err_code>
+<err_code_des><![CDATA[IP地址非你在商户平台设置的可用IP地址]]></err_code_des>
+<mch_billno><![CDATA[1385373702201610100808245905]]></mch_billno>
+<mch_id><![CDATA[1385373702]]></mch_id>
+<wxappid><![CDATA[wx898f13df6bf0ea41]]></wxappid>
+<re_openid><![CDATA[oLgNpwzC3S5tSqFKJrCDdjkyuDBs]]></re_openid>
+<total_amount>101</total_amount>
+</xml>

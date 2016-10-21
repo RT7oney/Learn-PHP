@@ -83,6 +83,17 @@ print_r($timestamp);
 echo '<hr>';
 print_r($sign);
 echo '<hr>';
+###################字典序#######################
+echo '===字典序排序===';
+$arr = array('time' => 123123, 'sign' => 1134234, 'data' => 111111);
+ksort($arr);
+// print_r($arr);
+$stringA = '';
+foreach ($arr as $key => $value) {
+	$stringA .= '&' . $key . '=' . $value;
+}
+$sign = sha1($stringA);
+print_r($sign);
 ?>
 
 <!-- 9ecfe3273a04eba562cf95f16cc961f8
