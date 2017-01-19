@@ -94,6 +94,9 @@ foreach ($arr as $key => $value) {
 }
 $sign = sha1($stringA);
 print_r($sign);
+###################字典序#######################
+echo '<hr>';
+echo sha1('123qweasd');
 ?>
 
 <!-- 9ecfe3273a04eba562cf95f16cc961f8
