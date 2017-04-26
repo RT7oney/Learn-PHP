@@ -76,14 +76,7 @@ var_dump($res);
 echo '<hr>';
 $encrypter->close();
 ##################签名#######################
-$timestamp = time();
-$app_key = "d07fac6c";
-$sign = md5($app_key . $timestamp);
-print_r($timestamp);
-echo '<hr>';
-print_r($sign);
-echo '<hr>';
-###################字典序#######################
+####################字典序#######################
 echo '===字典序排序===';
 $arr = array('time' => 123123, 'sign' => 1134234, 'data' => 111111);
 ksort($arr);
@@ -92,13 +85,17 @@ $stringA = '';
 foreach ($arr as $key => $value) {
 	$stringA .= '&' . $key . '=' . $value;
 }
-$sign = sha1($stringA);
-print_r($sign);
-###################字典序#######################
+$timestamp = time();
+$token = "62da646c990641db";
+$sign = md5($token . $timestamp);
+print_r($timestamp);
 echo '<hr>';
-echo sha1('123qweasd');
-?>
+print_r($sign);
+echo '<hr>';
 
+?>
+169fd5d38854f0939c218749dd449ab79deb6384
+8fb1bc5d133cea34f63a8abd0bc85a03cd7fc737
 <!-- 9ecfe3273a04eba562cf95f16cc961f8
 
 1472655189 -->

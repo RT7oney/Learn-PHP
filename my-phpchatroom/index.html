@@ -112,7 +112,7 @@
         alert('你的浏览器不支持 WebSocket ，推荐使用Google Chrome 或者 Mozilla Firefox');
     }
     var send_msg = 'type=talk&content=';
-    var url = 'ws://192.168.1.100:9999';
+    var url = 'ws://127.0.0.1:9999';
     $("#up-btn").click(function() {
         $("#btnCrop").click();
     });
@@ -132,14 +132,15 @@
         layer.close(index);
         $("#welcome-content").html('你好' + name + '!');
         console.log('我的名字------' + name);
-        layer.confirm('上传一张头像吧？', {
-            btn: ['好的', '算了'] //按钮
-        }, function(index) {
-            $("#file").click();
-            layer.close(index);
-        }, function(index) {
-            layer.close(index);
-        });
+        createSocket();
+        // layer.confirm('上传一张头像吧？', {
+        //     btn: ['好的', '算了'] //按钮
+        // }, function(index) {
+        //     $("#file").click();
+        //     layer.close(index);
+        // }, function(index) {
+        //     layer.close(index);
+        // });
     });
     // var name = prompt('取一个名字吧：');
 

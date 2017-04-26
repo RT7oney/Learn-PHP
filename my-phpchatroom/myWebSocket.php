@@ -2,7 +2,7 @@
 error_reporting(E_ALL & ~E_NOTICE);
 ob_implicit_flush();
 set_time_limit(0);
-$room = new ChatRoom('192.168.1.100', 9999);
+$room = new ChatRoom('127.0.0.1', 9999);
 $room->run();
 class ChatRoom {
 	public $master;
