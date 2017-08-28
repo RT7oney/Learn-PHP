@@ -1,0 +1,4 @@
+<?php $time= '1489420055'; return array (
+  '1wu' => 'ddd',
+  'wu1' => 'ddd1',
+);

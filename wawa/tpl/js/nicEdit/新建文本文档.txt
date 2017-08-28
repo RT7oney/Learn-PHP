@@ -1,0 +1,24 @@
+<script type="text/javascript" src="<?php echo TPL;?>js/nicEdit/cn.js"></script>
+<script type="text/javascript" >
+var nicEditurl =  '<?php echo TPL;?>js/nicEdit/';
+</script>
+
+<script type="text/javascript" src="<?php echo TPL;?>js/nicEdit/nicEdit.js"></script>
+<script type="text/javascript">
+
+var area1, area2;
+
+
+function toggleArea1() {
+	if(!area1) {
+		area1 = new nicEditor({fullPanel : true}).panelInstance('myArea1',{hasPanel : true});
+	} else {
+		area1.removeInstance('myArea1');
+		area1 = null;
+	}
+}
+
+
+    if( $("#myArea1").length )toggleArea1();
+
+    </script>

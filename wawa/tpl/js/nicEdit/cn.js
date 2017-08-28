@@ -1,0 +1,36 @@
+var niclang = {'EditHTML':'源码编辑',
+                   'bold':'加粗',
+	             'italic':'斜体',
+	          'underline':'下划线',
+	            'left' : '左对齐',
+	            'center' :'居中对其',
+	            'right' : '右对齐',
+	              'justify' :'二端对齐',
+	            'ol' :'插入排序的列表',
+	            'ul':'插入无序列表',
+	          'subscript':'设为下标',
+	          'superscript':'设为上标',
+	'strikethrough':'删除线',
+	'removeformat':'删除格式',
+
+'indent':'缩进',
+'outdent':'删除缩进',
+	'hr':'水平线',
+	'fontSize' :'选择字体大小',
+	'fontFamily':'选择字体',
+	'fontFormat':'选择字体格式',
+	'link':'添加连接',
+	'unlink':'删除连接',
+	'editlink':'添加或编辑连接',
+	'editopen' :'打开方式',
+	'benck':'本窗口打开',
+	'neck':'新窗口打开',
+	'paslink':'请输入网址',
+	'foncolor':'字体颜色',
+	'bgcolor':'背景颜色',
+	'image':'上传图片文件',
+
+               
+                
+
+	          };
